@@ -63,6 +63,8 @@ const router = createBrowserRouter(
       <Route path="/">
         <Route element={<HasHeaderRoutes />}>
           <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="cadastro" element={<Register />} />
           <Route element={<PrivateRoutes />}>
             <Route path="catalogo" element={<Catalog />} />
             <Route path="perfil" element={<Profile />} />
