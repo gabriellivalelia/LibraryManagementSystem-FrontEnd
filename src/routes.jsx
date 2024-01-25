@@ -8,7 +8,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Header from "./components/Header/header";
+import Header from "./components/Header/header.jsx";
 import {
   Home,
   Login,
@@ -21,9 +21,14 @@ import {
 
 // For the routes that need the user to be logged in
 function PrivateRoutes() {
-  const auth = false;
+  const auth = true;
+  const { pathname: from } = useLocation();
 
-  return !auth ? <NotAuthenticated /> : <Outlet />;
+  return !auth ? (
+    <Navigate to="/notAuthenticated" state={{ from }} />
+  ) : (
+    <Outlet />
+  );
 }
 
 // For the routes that need the user to be of the type Master
@@ -58,6 +63,8 @@ const router = createBrowserRouter(
       <Route path="/">
         <Route element={<HasHeaderRoutes />}>
           <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="cadastro" element={<Register />} />
           <Route element={<PrivateRoutes />}>
             <Route path="catalogo" element={<Catalog />} />
             <Route path="perfil" element={<Profile />} />
@@ -68,7 +75,7 @@ const router = createBrowserRouter(
 
         <Route path="login" element={<Login />} />
         <Route path="cadastro" element={<Register />} />
-
+        <Route path="notAuthenticated" element={<NotAuthenticated />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Route>
