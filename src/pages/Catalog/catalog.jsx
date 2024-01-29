@@ -4,15 +4,13 @@ import {
   BooksWrapper,
   BookCard,
   FiltersAndAddButtonWrapper,
-  SearchBarWrapper,
-  SearchBarInput,
-  SearchBarImage,
   Select,
   Option,
   Image,
   BookDescription,
-  CustomModal,
 } from "./styles";
+import { CustomModal } from "../../utils/commomStyles";
+import SearchBar from "../../components/SearchBar/searchBar";
 
 import { Books, Genres } from "./exempleBook";
 import { useState } from "react";
@@ -36,12 +34,7 @@ export default function Catalog() {
           footer={null}
         ></CustomModal>
         <FiltersAndAddButtonWrapper>
-          <SearchBarWrapper>
-            <SearchBarInput placeholder="Busque por título ou autor..." />
-            <SearchBarImage>
-              <i className="material-icons">search</i>
-            </SearchBarImage>
-          </SearchBarWrapper>
+          <SearchBar />
           <Select>
             <Option>Todos os gêneros</Option>
             {Genres.map((genre) => (

@@ -4,6 +4,8 @@ import {
   Wrapper,
   Input,
   StyledPhoneInput,
+  Select,
+  Option,
   LoginAndRegisterButtonsContainer,
 } from "./styles";
 import {
@@ -11,25 +13,24 @@ import {
   Form,
   InputWrapper,
   ErrorMessage,
-  TextButton,
   SubmitButton,
   CancelButton,
   FormTitle,
 } from "../../utils/commomStyles";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateUserFormSchema } from "./createUserFormSchema";
+import { AddUserFormSchema } from "./addUserFormSchema";
 import { useState, useEffect } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { getToday } from "../../utils/utils";
 
-export default function Register() {
+export default function AddUser() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(CreateUserFormSchema),
+    resolver: zodResolver(AddUserFormSchema),
   });
 
   const navigate = useNavigate();
@@ -42,7 +43,6 @@ export default function Register() {
   }, []);
 
   async function createUser(userData) {
-    userData.type = "Client";
     setLoading(true);
 
     console.log(userData);
@@ -54,7 +54,7 @@ export default function Register() {
     <React.StrictMode>
       <Wrapper>
         <FormWrapper>
-          <FormTitle>Cadastro</FormTitle>
+          <FormTitle>Adicionar Usuário</FormTitle>
           <Form onSubmit={handleSubmit(createUser)}>
             <InputWrapper>
               <label htmlFor="name">NOME COMPLETO:</label>
@@ -80,7 +80,20 @@ export default function Register() {
                 <ErrorMessage>{errors.email.message}</ErrorMessage>
               )}
             </InputWrapper>
-            <InputWrapper></InputWrapper>
+            <InputWrapper>
+              <label htmlFor="type">TIPO:</label>
+              <Select id="type" {...register("type")}>
+                <Option value="" disabled selected>
+                  Tipo de Usuário
+                </Option>
+                <Option value="client">Cliente</Option>
+                <Option value="master">Master</Option>
+                <Option value="librarian">Bibliotecário</Option>
+              </Select>
+              {errors.type && (
+                <ErrorMessage>{errors.type.message}</ErrorMessage>
+              )}
+            </InputWrapper>
             <InputWrapper>
               <label htmlFor="phone_number">TELEFONE:</label>
               <StyledPhoneInput
@@ -133,12 +146,12 @@ export default function Register() {
               )}
             </InputWrapper>
             <InputWrapper>
-              <label htmlFor="confirmedPassword">CONFIRME SUA SENHA:</label>
+              <label htmlFor="confirmedPassword">CONFIRME A SENHA:</label>
               <Input
                 type="password"
                 id="confirmedPassword"
                 autoComplete="off"
-                placeholder="Confirme sua senha"
+                placeholder="Confirme a senha"
                 {...register("confirmedPassword")}
               />
               {errors.confirmedPassword && (
@@ -157,16 +170,13 @@ export default function Register() {
                 <CancelButton
                   type="button"
                   value="CANCELAR"
-                  onClick={() => navigate("/Cadastro")}
+                  onClick={() => navigate("/")}
                 />
 
                 <SubmitButton type="submit" value="FINALIZAR" />
               </LoginAndRegisterButtonsContainer>
             )}
           </Form>
-          <TextButton onClick={() => navigate("/Login")}>
-            Já tenho cadastro
-          </TextButton>
         </FormWrapper>
       </Wrapper>
     </React.StrictMode>

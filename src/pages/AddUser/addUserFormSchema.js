@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const CreateUserFormSchema = z
+export const AddUserFormSchema = z
   .object({
     name: z
       .string()
@@ -15,7 +15,6 @@ export const CreateUserFormSchema = z
           })
           .join(" ");
       }),
-
     email: z
       .string()
       .nonempty("Esse campo é obrigatório!")

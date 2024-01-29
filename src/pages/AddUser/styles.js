@@ -18,6 +18,16 @@ export const StyledPhoneInput = styled(InputMask)`
   ${FormShields}
 `;
 
+export const Select = styled.select`
+  ${FormShields}
+  padding: 0 1% 0 1%;
+`;
+
+export const Option = styled.option`
+  background-color: #061c48;
+  color: white;
+`;
+
 export const LoginAndRegisterButtonsContainer = styled.div`
   width: 100%;
   background: transparent;

@@ -1,16 +1,14 @@
 import React from "react";
+import { Wrapper, Input, ButtonWrapper } from "./styles";
 import {
-  Wrapper,
   FormWrapper,
   Form,
+  FormTitle,
   InputWrapper,
-  Input,
-  Message,
+  ErrorMessage,
   SubmitButton,
-  ButtonWrapper,
-  Button,
-  LoaderBox,
-} from "./styles";
+  TextButton,
+} from "../../utils/commomStyles";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
@@ -44,16 +42,7 @@ export default function Login() {
     <React.StrictMode>
       <Wrapper>
         <FormWrapper>
-          <div
-            style={{
-              fontSize: "3rem",
-              color: "white",
-              fontFamily: "Lora",
-              paddingBottom: "2rem",
-            }}
-          >
-            Login
-          </div>
+          <FormTitle>Login</FormTitle>
           <Form onSubmit={handleSubmit(Login)}>
             <InputWrapper>
               <label htmlFor="email">Email:</label>
@@ -63,7 +52,9 @@ export default function Login() {
                 {...register("email")}
                 autoComplete="off"
               />
-              {errors.email && <Message>{errors.email.message}</Message>}
+              {errors.email && (
+                <ErrorMessage>{errors.email.message}</ErrorMessage>
+              )}
             </InputWrapper>
             <InputWrapper>
               <label htmlFor="password">Senha:</label>
@@ -74,21 +65,25 @@ export default function Login() {
                 {...register("password")}
                 autoComplete="off"
               />
-              {errors.password && <Message>{errors.password.message}</Message>}
+              {errors.password && (
+                <ErrorMessage>{errors.password.message}</ErrorMessage>
+              )}
             </InputWrapper>
-            <Message>{loginError}</Message>
+            <ErrorMessage>{loginError}</ErrorMessage>
             {loading ? (
-              <LoaderBox>
+              {
+                /* <LoaderBox>
                 <LoadingOutlined spin />
-              </LoaderBox>
+              </LoaderBox> */
+              }
             ) : (
               <SubmitButton type="submit" value="Entrar" />
             )}
           </Form>
           <ButtonWrapper>
-            <Button onClick={() => navigate("/Cadastro")}>
+            <TextButton onClick={() => navigate("/Cadastro")}>
               Ainda não tenho cadastro
-            </Button>
+            </TextButton>
           </ButtonWrapper>
         </FormWrapper>
       </Wrapper>
