@@ -16,6 +16,7 @@ import {
   Catalog,
   Profile,
   AddUser,
+  AddBook,
   NotFound,
   NotAuthenticated,
 } from "./pages";
@@ -71,9 +72,11 @@ const router = createBrowserRouter(
             <Route path="perfil" element={<Profile />} />
             <Route element={<MasterRoutes />}>
               <Route path="cadastrarUsuario" element={<AddUser />} />
+              <Route path="adicionarLivro" element={<AddBook />} />
             </Route>
             <Route element={<LibrarianRoutes />}>
               <Route path="cadastrarUsuario" element={<AddUser />} />
+              <Route path="adicionarLivro" element={<AddBook />} />
             </Route>
           </Route>
         </Route>
