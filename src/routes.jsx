@@ -17,6 +17,7 @@ import {
   Profile,
   AddUser,
   AddBook,
+  UserList,
   NotFound,
   NotAuthenticated,
 } from "./pages";
@@ -33,16 +34,8 @@ function PrivateRoutes() {
   );
 }
 
-// For the routes that need the user to be of the type Master
-function MasterRoutes() {
-  const auth = true;
-  const { pathname: from } = useLocation();
-
-  return !auth ? <Navigate to="/login" state={{ from }} /> : <Outlet />;
-}
-
-// For the routes that need the user to be of the type Librarian
-function LibrarianRoutes() {
+// For the routes that need the user to be of the type Master or Librarian
+function AdmRoutes() {
   const auth = true;
   const { pathname: from } = useLocation();
 
@@ -70,13 +63,10 @@ const router = createBrowserRouter(
           <Route element={<PrivateRoutes />}>
             <Route path="catalogo" element={<Catalog />} />
             <Route path="perfil" element={<Profile />} />
-            <Route element={<MasterRoutes />}>
+            <Route element={<AdmRoutes />}>
               <Route path="cadastrarUsuario" element={<AddUser />} />
               <Route path="adicionarLivro" element={<AddBook />} />
-            </Route>
-            <Route element={<LibrarianRoutes />}>
-              <Route path="cadastrarUsuario" element={<AddUser />} />
-              <Route path="adicionarLivro" element={<AddBook />} />
+              <Route path="listaDeUsuarios" element={<UserList />} />
             </Route>
           </Route>
         </Route>

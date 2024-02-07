@@ -34,7 +34,7 @@ export default function Catalog() {
           footer={null}
         ></CustomModal>
         <FiltersAndAddButtonWrapper>
-          <SearchBar />
+          <SearchBar placeholder="Busque por título ou autor..." />
           <Select>
             <Option>Todos os gêneros</Option>
             {Genres.map((genre) => (

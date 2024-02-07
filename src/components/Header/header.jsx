@@ -37,7 +37,7 @@ export default function Header() {
         },
         userType === "Master" && {
           key: "3",
-          label: <Link to="/">Usuários</Link>,
+          label: <Link to="listaDeUsuarios">Usuários</Link>,
         },
         {
           key: "4",
@@ -70,7 +70,7 @@ export default function Header() {
             <Hover>Home</Hover>
           </Link>
           {(userType === "Master" || userType === "Librarian") && (
-            <Link to="/">
+            <Link to="listaDeUsuarios">
               <Hover>Usuários</Hover>
             </Link>
           )}
