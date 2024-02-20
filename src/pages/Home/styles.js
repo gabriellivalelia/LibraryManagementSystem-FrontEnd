@@ -88,6 +88,7 @@ export const DataWrapper = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  gap: 15px;
 `;
 
 export const TextAndIcon = styled.div`

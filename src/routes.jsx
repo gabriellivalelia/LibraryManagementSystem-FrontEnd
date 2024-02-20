@@ -21,6 +21,7 @@ import {
   Notifications,
   NotFound,
   NotAuthenticated,
+  AcessDenied,
 } from "./pages";
 
 // For the routes that need the user to be logged in
@@ -29,7 +30,7 @@ function PrivateRoutes() {
   const { pathname: from } = useLocation();
 
   return !auth ? (
-    <Navigate to="/notAuthenticated" state={{ from }} />
+    <Navigate to="/naoAutenticado" state={{ from }} />
   ) : (
     <Outlet />
   );
@@ -40,7 +41,7 @@ function AdmRoutes() {
   const auth = true;
   const { pathname: from } = useLocation();
 
-  return !auth ? <Navigate to="/login" state={{ from }} /> : <Outlet />;
+  return !auth ? <Navigate to="/acessoNegado" state={{ from }} /> : <Outlet />;
 }
 
 // For the routes that need footer
@@ -75,7 +76,8 @@ const router = createBrowserRouter(
 
         <Route path="login" element={<Login />} />
         <Route path="cadastro" element={<Register />} />
-        <Route path="notAuthenticated" element={<NotAuthenticated />} />
+        <Route path="naoAutenticado" element={<NotAuthenticated />} />
+        <Route path="acessoNegado" element={<AcessDenied />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Route>

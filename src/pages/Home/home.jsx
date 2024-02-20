@@ -21,10 +21,10 @@ export default function Home() {
               <>Sobre Nós</>
             </Title>
             <div style={{ fontSize: "1.1rem" }}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
+              Oferecemos uma vasta coleção de obras que abrangem desde clássicos
+              atemporais até as mais recentes novidades. Comprometidos em ser um
+              centro vital de aprendizado e cultura. Venha nos visitar e
+              deixe-se envolver pela magia da leitura.
             </div>
           </AboutUsWrapper>
           <DataWrapper>
@@ -33,15 +33,16 @@ export default function Home() {
                 location_on
               </i>
               <>
-                Rua Zilah Correia de Araújo, 345. Bairro Ouro Preto, Belo
-                Horizonte/MG
+                Rua Correia de Araújo, 18. Bairro Ouro Preto, Belo Horizonte/MG
               </>
             </TextAndIcon>
             <TextAndIcon>
               <i className="material-icons" style={{ color: Colors.ORANGE }}>
                 mail
               </i>
-              <>library@hotmail.com</>
+              <div style={{ textDecoration: "underline" }}>
+                library@hotmail.com
+              </div>
             </TextAndIcon>
             <TextAndIcon>
               <i className="material-icons" style={{ color: Colors.ORANGE }}>
