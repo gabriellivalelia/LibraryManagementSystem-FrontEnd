@@ -125,7 +125,7 @@ export default function Header() {
             account_circle
           </i>
           <i
-            onClick={() => Navigate("/Cadastro")}
+            onClick={() => Navigate("/Notificacoes")}
             className="material-icons"
             style={{ fontSize: "2.5rem", cursor: "pointer" }}
             onMouseOver={(e) => (e.target.style.color = "white")}

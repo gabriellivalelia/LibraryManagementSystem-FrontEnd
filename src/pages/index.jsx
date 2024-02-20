@@ -6,6 +6,7 @@ export { default as Catalog } from "./Catalog/catalog";
 export { default as AddUser } from "./AddUser/addUser";
 export { default as AddBook } from "./AddBook/addBook";
 export { default as UserList } from "./UsersList/usersList";
+export { default as Notifications } from "./Notifications/notications"
 export { default as NotFound } from "./NotFound/notFound";
 export { default as NotAuthenticated } from "./NotFound/notFound";
 export { default as AcessDenied } from "./AcessDenied/acessDenied";

@@ -18,6 +18,7 @@ import {
   AddUser,
   AddBook,
   UserList,
+  Notifications,
   NotFound,
   NotAuthenticated,
 } from "./pages";
@@ -63,6 +64,7 @@ const router = createBrowserRouter(
           <Route element={<PrivateRoutes />}>
             <Route path="catalogo" element={<Catalog />} />
             <Route path="perfil" element={<Profile />} />
+            <Route path="notificacoes" element={<Notifications />} />
             <Route element={<AdmRoutes />}>
               <Route path="cadastrarUsuario" element={<AddUser />} />
               <Route path="adicionarLivro" element={<AddBook />} />
