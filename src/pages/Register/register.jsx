@@ -20,8 +20,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateUserFormSchema } from "./createUserFormSchema";
 import { useState, useEffect } from "react";
-import { LoadingOutlined } from "@ant-design/icons";
-import { getToday } from "../../utils/utils";
+import { getToday, convertDateToDateTimeType } from "../../utils/utils";
+import * as EndPoints from "../../services/api/endPoints";
+import { Authenticated } from "../../services/api/auth";
 
 export default function Register() {
   const {
@@ -42,10 +43,25 @@ export default function Register() {
   }, []);
 
   async function createUser(userData) {
-    userData.type = "Client";
     setLoading(true);
+    setRegisterError("");
+    userData.type = "Cliente";
+    userData.date_of_birth = convertDateToDateTimeType(userData.date_of_birth);
 
-    console.log(userData);
+    try {
+      await EndPoints.createUser(userData);
+      const res = await EndPoints.logIn({
+        email: userData.email,
+        password: userData.password,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      Authenticated();
+      alert("Cadastro criado com sucesso.");
+      navigate("/");
+    } catch (error) {
+      setRegisterError(error?.response?.data?.message || "Erro ao cadastrar.");
+    }
 
     setLoading(false);
   }
@@ -146,23 +162,23 @@ export default function Register() {
               )}
             </InputWrapper>
             <ErrorMessage>{registerError}</ErrorMessage>
-            {loading ? (
+            {/* {loading ? (
               {
-                /* <LoaderBox>
+                 <LoaderBox>
                 <LoadingOutlined spin />
-              </LoaderBox> */
+              </LoaderBox> 
               }
-            ) : (
-              <LoginAndRegisterButtonsContainer>
-                <CancelButton
-                  type="button"
-                  value="CANCELAR"
-                  onClick={() => navigate("/Cadastro")}
-                />
+            ) : ( */}
+            <LoginAndRegisterButtonsContainer>
+              <CancelButton
+                type="button"
+                value="CANCELAR"
+                onClick={() => navigate("/Cadastro")}
+              />
 
-                <SubmitButton type="submit" value="FINALIZAR" />
-              </LoginAndRegisterButtonsContainer>
-            )}
+              <SubmitButton type="submit" value="FINALIZAR" />
+            </LoginAndRegisterButtonsContainer>
+            {/*  )} */}
           </Form>
           <TextButton onClick={() => navigate("/Login")}>
             Já tenho cadastro

@@ -61,7 +61,7 @@ export const LoginAndRegisterButtonsContainer = styled.div`
   background: transparent;
   height: 100%;
 
-  display: ${(props) => (props.authenticated && "none") || "flex"};
+  display: ${(props) => (props.authenticated ? "none" : "flex")};
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -77,7 +77,7 @@ export const ProfileAndNotificationsButtonsContainer = styled.div`
   background: transparent;
   height: 100%;
 
-  display: ${(props) => (props.authenticated && "none") || "flex"};
+  display: ${(props) => (props.authenticated ? "flex" : "none")};
   flex-direction: row;
   justify-content: end;
   align-items: center;

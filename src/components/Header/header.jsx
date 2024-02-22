@@ -13,19 +13,12 @@ import {
 } from "./styles";
 import Logo from "../../assets/Logo.svg";
 import Dropdown from "antd/es/dropdown/dropdown";
-import { MenuOutlined } from "@ant-design/icons";
+import { Authenticated } from "../../services/api/auth.js";
 
 export default function Header() {
-  const authenticated =
-    localStorage.getItem("tokenAcess") !== null &&
-    localStorage.getItem("tokenAcess") !== "undefined" &&
-    localStorage.getItem("tokenAcess") !== ""
-      ? true
-      : false;
-  const userType = "Master";
   const Navigate = useNavigate();
 
-  const items = authenticated
+  const items = Authenticated()
     ? [
         {
           key: "1",
@@ -35,7 +28,7 @@ export default function Header() {
           key: "2",
           label: <Link to="catalago">Catálogo</Link>,
         },
-        userType === "Master" && {
+        Authenticated() !== "Cliente" && {
           key: "3",
           label: <Link to="listaDeUsuarios">Usuários</Link>,
         },
@@ -65,11 +58,11 @@ export default function Header() {
         <ImageWrapper>
           <Image src={Logo} />
         </ImageWrapper>
-        <NavBar authenticated="true">
+        <NavBar authenticated={Authenticated()}>
           <Link to="/">
             <Hover>Home</Hover>
           </Link>
-          {(userType === "Master" || userType === "Librarian") && (
+          {Authenticated() && Authenticated().type !== "Cliente" && (
             <Link to="listaDeUsuarios">
               <Hover>Usuários</Hover>
             </Link>
@@ -95,7 +88,7 @@ export default function Header() {
             </i>
           </Dropdown>
         </DropDownContainer>
-        <LoginAndRegisterButtonsContainer authenticated={!authenticated}>
+        <LoginAndRegisterButtonsContainer authenticated={Authenticated()}>
           <Button
             Background="white"
             Color="#913211"
@@ -114,7 +107,9 @@ export default function Header() {
             CADASTRE-SE
           </Button>
         </LoginAndRegisterButtonsContainer>
-        <ProfileAndNotificationsButtonsContainer authenticated={authenticated}>
+        <ProfileAndNotificationsButtonsContainer
+          authenticated={Authenticated()}
+        >
           <i
             onClick={() => Navigate("/perfil")}
             className="material-icons"

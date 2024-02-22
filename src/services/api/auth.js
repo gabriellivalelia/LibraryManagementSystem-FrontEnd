@@ -1,6 +1,7 @@
-export const authenticated =
-  localStorage.getItem("tokenAcess") !== null &&
-  localStorage.getItem("tokenAcess") !== "undefined" &&
-  localStorage.getItem("tokenAcess") !== ""
-    ? true
-    : false;
+import { jwtDecode } from "jwt-decode";
+
+export function Authenticated() {
+  return localStorage.getItem("token")
+    ? jwtDecode(localStorage.getItem("token"))
+    : null;
+}

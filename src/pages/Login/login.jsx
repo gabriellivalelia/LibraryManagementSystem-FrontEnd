@@ -12,9 +12,10 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { LoadingOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { LoginFormSchema } from "./loginFormSchema";
+import * as EndPoints from "../../services/api/endPoints";
+import { Authenticated } from "../../services/api/auth";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -32,8 +33,20 @@ export default function Login() {
 
   async function Login(data) {
     setLoading(true);
+    setLoginError("");
 
-    console.log(data);
+    try {
+      const res = await EndPoints.logIn({
+        email: data.email,
+        password: data.password,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      Authenticated();
+      navigate("/");
+    } catch (error) {
+      setLoginError(error?.response?.data?.message || "Erro ao fazer login.");
+    }
 
     setLoading(false);
   }
@@ -70,15 +83,14 @@ export default function Login() {
               )}
             </InputWrapper>
             <ErrorMessage>{loginError}</ErrorMessage>
-            {loading ? (
+            {/*  {loading ? (
               {
-                /* <LoaderBox>
+                 <LoaderBox>
                 <LoadingOutlined spin />
-              </LoaderBox> */
+              </LoaderBox>
               }
-            ) : (
-              <SubmitButton type="submit" value="Entrar" />
-            )}
+            ) : ( */}
+            <SubmitButton type="submit" value="Entrar" />
           </Form>
           <ButtonWrapper>
             <TextButton onClick={() => navigate("/Cadastro")}>

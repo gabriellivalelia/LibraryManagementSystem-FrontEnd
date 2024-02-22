@@ -16,9 +16,16 @@ import {
 import { Books } from "./example";
 import { Colors } from "../../utils/defaultVariables";
 import { useNavigate } from "react-router-dom";
+import { Authenticated } from "../../services/api/auth";
 
 export default function Profile() {
   const navigate = useNavigate();
+
+  function logOut() {
+    localStorage.clear();
+    Authenticated();
+    navigate("/login");
+  }
 
   return (
     <React.StrictMode>
@@ -52,7 +59,7 @@ export default function Profile() {
           </DataWrapper>
           <Buttons>
             <LogoutButton>LOGOUT</LogoutButton>
-            <EditUserButton>EDITAR DADOS</EditUserButton>
+            <EditUserButton onClick={logOut()}>EDITAR DADOS</EditUserButton>
           </Buttons>
         </LeftWrapper>
         <RightWrapper>
