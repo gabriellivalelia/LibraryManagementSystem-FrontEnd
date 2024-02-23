@@ -5,3 +5,8 @@ export const updateUser = (user) => instance.put("/updateUser", user);
 export const getUserById = (id) => instance.get(`/getUserById/${id}`);
 export const logIn = (data) => instance.post("/logIn", data);
 export const deleteUser = (id) => instance.delete(`/deleteUser/${id}`);
+
+export const getBookById = (id) => instance.get(`/getBookById/${id}`);
+
+export const getRentalByClientId = (id) =>
+  instance.get(`/getRentalByClientId/${id}`);

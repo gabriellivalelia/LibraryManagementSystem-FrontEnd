@@ -16,7 +16,7 @@ import Dropdown from "antd/es/dropdown/dropdown";
 import { Authenticated } from "../../services/api/auth.js";
 
 export default function Header() {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const items = Authenticated()
     ? [
@@ -93,7 +93,7 @@ export default function Header() {
             Background="white"
             Color="#913211"
             Border="#913211 "
-            onClick={() => Navigate("/Login")}
+            onClick={() => navigate("/Login")}
           >
             LOGIN
           </Button>
@@ -102,7 +102,7 @@ export default function Header() {
             Background="#F0480C"
             Color="white"
             Border="#913211"
-            onClick={() => Navigate("/Cadastro")}
+            onClick={() => navigate("/Cadastro")}
           >
             CADASTRE-SE
           </Button>
@@ -111,7 +111,7 @@ export default function Header() {
           authenticated={Authenticated()}
         >
           <i
-            onClick={() => Navigate("/perfil")}
+            onClick={() => navigate("/perfil")}
             className="material-icons"
             style={{ fontSize: "2.5rem", cursor: "pointer" }}
             onMouseOver={(e) => (e.target.style.color = "white")}
@@ -120,7 +120,7 @@ export default function Header() {
             account_circle
           </i>
           <i
-            onClick={() => Navigate("/Notificacoes")}
+            onClick={() => navigate("/Notificacoes")}
             className="material-icons"
             style={{ fontSize: "2.5rem", cursor: "pointer" }}
             onMouseOver={(e) => (e.target.style.color = "white")}

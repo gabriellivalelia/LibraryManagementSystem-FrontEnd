@@ -72,13 +72,10 @@ const router = createBrowserRouter(
               <Route path="listaDeUsuarios" element={<UserList />} />
             </Route>
           </Route>
+          <Route path="naoAutenticado" element={<NotAuthenticated />} />
+          <Route path="acessoNegado" element={<AcessDenied />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
-
-        <Route path="login" element={<Login />} />
-        <Route path="cadastro" element={<Register />} />
-        <Route path="naoAutenticado" element={<NotAuthenticated />} />
-        <Route path="acessoNegado" element={<AcessDenied />} />
-        <Route path="*" element={<NotFound />} />
       </Route>
     </Route>
   )
