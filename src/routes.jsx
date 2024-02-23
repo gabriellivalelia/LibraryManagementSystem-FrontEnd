@@ -15,6 +15,7 @@ import {
   Register,
   Catalog,
   Profile,
+  EditProfile,
   AddUser,
   AddBook,
   UserList,
@@ -65,6 +66,7 @@ const router = createBrowserRouter(
           <Route element={<PrivateRoutes />}>
             <Route path="catalogo" element={<Catalog />} />
             <Route path="perfil" element={<Profile />} />
+            <Route path="editarPerfil" element={<EditProfile />} />
             <Route path="notificacoes" element={<Notifications />} />
             <Route element={<AdmRoutes />}>
               <Route path="cadastrarUsuario" element={<AddUser />} />
