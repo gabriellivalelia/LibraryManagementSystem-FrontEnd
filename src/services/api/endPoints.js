@@ -1,6 +1,12 @@
 import instance from "./instance";
 
-export const createUser = (user) => instance.post("/createUser", user);
+export const createUser = (user) => {
+  const token = localStorage.getItem("token");
+
+  instance.post("/createUser", user, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
 export const updateUser = (user) => instance.put("/updateUser", user);
 export const getUserById = (id) => instance.get(`/getUserById/${id}`);
 export const logIn = (data) => instance.post("/logIn", data);

@@ -4,6 +4,9 @@ import { FormShields } from "../../utils/commomStyles";
 
 export const Wrapper = styled.div`
   flex: 1;
+  width: 100%;
+  height: 86vh;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;

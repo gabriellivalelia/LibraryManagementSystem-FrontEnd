@@ -19,8 +19,8 @@ import { Authenticated } from "../../services/api/auth";
 import * as EndPoints from "../../services/api/endPoints";
 import { convertDataTime } from "../../utils/utils";
 import { CustomModal } from "../../utils/commomStyles";
-import RentedBookModal from "../../components/RentedBookModal/rentedBookModal.jsx";
-import WaitingBookModal from "../../components/WaitingBookModal/waitingBook.Modal.jsx";
+import RentedBookModal from "../../modals/RentedBookModal/rentedBookModal.jsx";
+import WaitingBookModal from "../../modals/WaitingBookModal/waitingBook.Modal.jsx";
 
 export default function Profile() {
   const navigate = useNavigate();

@@ -19,9 +19,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EditProfileFormSchema } from "./editProfileFormSchema";
 import { useState, useEffect } from "react";
-import { getToday, convertDateToDateTimeType } from "../../utils/utils";
+import {
+  getToday,
+  convertDateToDateTimeType,
+  convertDataTime,
+} from "../../utils/utils";
 import * as EndPoints from "../../services/api/endPoints";
 import { Authenticated } from "../../services/api/auth";
+import LoaderPage from "../../components/LoaderPage/loaderpage";
+import { convertDateTimeToYearMonthDay } from "./editProfile.utils";
 
 export default function EditProfile() {
   const {
@@ -47,16 +53,8 @@ export default function EditProfile() {
     setLoading(true);
     setUpdateError("");
 
-    userData.id = Authenticated().id;
-    userData.date_of_birth = userData.date_of_birth
-      ? convertDateToDateTimeType(userData.date_of_birth)
-      : "";
-
-    for (const key in userData) {
-      if (userData[key] === "") {
-        delete userData[key];
-      }
-    }
+    userData.id = user.id;
+    userData.date_of_birth = convertDateToDateTimeType(userData.date_of_birth);
 
     try {
       await EndPoints.updateUser(userData);
@@ -78,8 +76,8 @@ export default function EditProfile() {
   }, []);
 
   return (
-    <React.StrictMode>
-      <Wrapper>
+    <Wrapper>
+      {user ? (
         <FormWrapper>
           <FormTitle>Editar Perfil</FormTitle>
           <Form onSubmit={handleSubmit(createUser)}>
@@ -89,7 +87,7 @@ export default function EditProfile() {
                 id="name"
                 {...register("name")}
                 autoComplete="off"
-                placeholder={user?.name}
+                defaultValue={user?.name}
               />
               {errors.name && (
                 <ErrorMessage>{errors.name.message}</ErrorMessage>
@@ -101,7 +99,7 @@ export default function EditProfile() {
                 id="email"
                 {...register("email")}
                 autoComplete="off"
-                placeholder={user?.email}
+                defaultValue={user?.email}
               />
               {errors.email && (
                 <ErrorMessage>{errors.email.message}</ErrorMessage>
@@ -115,7 +113,7 @@ export default function EditProfile() {
                 mask="(99) 99999-9999"
                 {...register("phone_number")}
                 autoComplete="off"
-                placeholder={user?.phone_number}
+                defaultValue={user?.phone_number}
               />
               {errors.phone_number && (
                 <ErrorMessage>{errors.phone_number.message}</ErrorMessage>
@@ -128,7 +126,9 @@ export default function EditProfile() {
                 type="date"
                 {...register("date_of_birth")}
                 autoComplete="off"
-                placeholder="Data de nascimento"
+                defaultValue={convertDateTimeToYearMonthDay(
+                  user?.date_of_birth
+                )}
                 max={today}
               />
               {errors.date_of_birth && (
@@ -142,32 +142,28 @@ export default function EditProfile() {
                 mask="999.999.999-99"
                 {...register("cpf")}
                 autoComplete="off"
-                placeholder={user?.cpf}
+                defaultValue={user?.cpf}
               />
               {errors.cpf && <ErrorMessage>{errors.cpf.message}</ErrorMessage>}
             </InputWrapper>
-
             <ErrorMessage>{updateError}</ErrorMessage>
-            {/* {loading ? (
-                  {
-                     <LoaderBox>
-                    <LoadingOutlined spin />
-                  </LoaderBox> 
-                  }
-                ) : ( */}
-            <LoginAndRegisterButtonsContainer>
-              <CancelButton
-                type="button"
-                value="CANCELAR"
-                onClick={() => navigate("/perfil")}
-              />
-
-              <SubmitButton type="submit" value="FINALIZAR" />
-            </LoginAndRegisterButtonsContainer>
-            {/*  )} */}
+            {loading ? (
+              <LoaderPage />
+            ) : (
+              <LoginAndRegisterButtonsContainer>
+                <CancelButton
+                  type="button"
+                  value="CANCELAR"
+                  onClick={() => navigate("/perfil")}
+                />
+                <SubmitButton type="submit" value="FINALIZAR" />
+              </LoginAndRegisterButtonsContainer>
+            )}
           </Form>
         </FormWrapper>
-      </Wrapper>
-    </React.StrictMode>
+      ) : (
+        <LoaderPage />
+      )}
+    </Wrapper>
   );
 }
