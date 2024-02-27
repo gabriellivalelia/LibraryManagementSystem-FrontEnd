@@ -80,6 +80,7 @@ export const BookCard = styled.div`
   justify-content: space-between;
   padding-top: 5%;
   padding-bottom: 5%;
+  cursor: pointer;
 
   &:hover {
     width: 210px;

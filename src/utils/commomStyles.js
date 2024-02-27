@@ -127,22 +127,6 @@ export const TextButton = styled.button`
   }
 `;
 
-/* export const LoaderBox = styled.div`
-  width: 50%;
-  min-width: 120px;
-  height: 32px;
-  background: #f0480c;
-  color: white;
-  border: solid 1px;
-  border-color: #913211;
-  border-radius: 0.625rem;
-  margin-top: 2%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`; */
-
 export const CustomModal = styled(Modal)`
   .ant-modal-content {
     background-color: ${Colors.LIGHTBLUE};
