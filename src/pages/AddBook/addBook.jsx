@@ -18,10 +18,12 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddBookFormSchema } from "./addBookFormSchema";
-import { useState, useEffect } from "react";
-import { LoadingOutlined, UploadOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { UploadOutlined } from "@ant-design/icons";
 import { Upload } from "antd";
 import { Colors } from "../../utils/defaultVariables";
+import * as EndPoints from "../../services/api/endPoints";
+import LoaderPage from "../../components/LoaderPage/loaderpage";
 
 export default function AddBook() {
   const getBase64 = (img, callback) => {
@@ -39,7 +41,7 @@ export default function AddBook() {
   });
 
   const navigate = useNavigate();
-  const [registerError, setRegisterError] = useState("");
+  const [createError, setCreateError] = useState("");
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [imageError, setImageError] = useState();
@@ -56,6 +58,7 @@ export default function AddBook() {
     }
 
     setImageName(file.name);
+
     setImageError("");
     return isJpgOrPng && isLt2M;
   };
@@ -70,12 +73,22 @@ export default function AddBook() {
   async function createBook(bookData) {
     if (!imageUrl) setImageError("Esse campo é obrigatório");
 
-    bookData.available_quantity = bookData.total_quantity;
+    bookData.available_quantity = parseInt(bookData.total_quantity);
+    bookData.total_quantity = parseInt(bookData.total_quantity);
+    bookData.pages = parseInt(bookData.pages);
     bookData.media_base64 = imageUrl;
 
     setLoading(true);
 
-    console.log(bookData);
+    try {
+      await EndPoints.createBook(bookData);
+      alert("Livro adicionado com sucesso.");
+      navigate("/catalogo");
+    } catch (error) {
+      setCreateError(
+        error?.response?.data?.message || "Erro ao adicionar livro."
+      );
+    }
 
     setLoading(false);
   }
@@ -191,19 +204,15 @@ export default function AddBook() {
               </UploadButton>
               {imageError && <ErrorMessage>{imageError}</ErrorMessage>}
             </InputWrapper>
-            <ErrorMessage>{registerError}</ErrorMessage>
+            <ErrorMessage>{createError}</ErrorMessage>
             {loading ? (
-              {
-                /* <LoaderBox>
-                <LoadingOutlined spin />
-              </LoaderBox> */
-              }
+              <LoaderPage />
             ) : (
               <LoginAndRegisterButtonsContainer>
                 <CancelButton
                   type="button"
                   value="CANCELAR"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate("/catalogo")}
                 />
 
                 <SubmitButton type="submit" value="FINALIZAR" />

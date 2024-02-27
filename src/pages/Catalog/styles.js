@@ -21,7 +21,7 @@ export const FiltersAndAddButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: start;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 
   @media (max-width: 590px) {
     flex-direction: column;
@@ -68,6 +68,20 @@ export const BooksWrapper = styled.div`
   row-gap: 2em;
   box-sizing: border-box;
   overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${Colors.WHITE};
+    border-radius: 20px;
+    border: 3px solid ${Colors.BLUE};
+  }
 `;
 
 export const BookCard = styled.div`
@@ -81,6 +95,7 @@ export const BookCard = styled.div`
   padding-top: 5%;
   padding-bottom: 5%;
   cursor: pointer;
+  transition: 0.5s;
 
   &:hover {
     width: 210px;

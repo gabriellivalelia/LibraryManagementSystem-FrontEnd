@@ -12,6 +12,7 @@ export const getUserById = (id) => instance.get(`/getUserById/${id}`);
 export const logIn = (data) => instance.post("/logIn", data);
 export const deleteUser = (id) => instance.delete(`/deleteUser/${id}`);
 
+export const createBook = (book) => instance.post("/createBook", book);
 export const getBooks = () => instance.get("/getBooks");
 export const getBooksByGenre = (genre) =>
   instance.get(`/getBooksByGenre/${genre}`);
