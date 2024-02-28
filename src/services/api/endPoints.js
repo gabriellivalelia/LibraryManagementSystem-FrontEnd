@@ -8,6 +8,8 @@ export const createUser = (user) => {
   });
 };
 export const updateUser = (user) => instance.put("/updateUser", user);
+export const getUsers = () => instance.get("/getUsers");
+export const getUsersByType = (type) => instance.get(`/getUsersByType/${type}`);
 export const getUserById = (id) => instance.get(`/getUserById/${id}`);
 export const logIn = (data) => instance.post("/logIn", data);
 export const deleteUser = (id) => instance.delete(`/deleteUser/${id}`);

@@ -12,7 +12,6 @@ import { CustomModal } from "../../utils/commomStyles";
 import { AddBookButton } from "./components";
 import SearchBar from "../../components/SearchBar/searchBar";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import * as EndPoints from "../../services/api/endPoints";
 import ViewBookModal from "../../modals/ViewBookModal/viewBookModal";
 

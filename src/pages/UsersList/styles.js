@@ -30,14 +30,30 @@ export const Name = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    font-weight: ${(props) => props.hover && "bold"};
+  }
 `;
 
 export const CPF = styled.div`
   width: 35%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Type = styled.div`
-  width: 20%;
+  width: calc(20% - 24px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const UsersWrapper = styled.div`
@@ -108,4 +124,12 @@ export const Select = styled.select`
 export const Option = styled.option`
   background-color: ${Colors.LIGHTBLUE};
   color: ${Colors.WHITE};
+`;
+
+export const DeleteUserButton = styled.i`
+  cursor: pointer;
+
+  &:hover {
+    color: ${Colors.ORANGE};
+  }
 `;
