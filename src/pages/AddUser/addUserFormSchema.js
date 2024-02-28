@@ -20,6 +20,7 @@ export const AddUserFormSchema = z
       .nonempty("Esse campo é obrigatório!")
       .email("Formato de email inválido!")
       .toLowerCase(),
+    type: z.string().nonempty("Esse campo é obrigatório!"),
     phone_number: z
       .string()
       .nonempty("Esse campo é obrigatório!")

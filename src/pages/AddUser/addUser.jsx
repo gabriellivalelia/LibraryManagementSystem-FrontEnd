@@ -23,6 +23,10 @@ import { AddUserFormSchema } from "./addUserFormSchema";
 import { useState, useEffect } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { getToday } from "../../utils/utils";
+import { Authenticated } from "../../services/api/auth";
+import { convertDateToDateTimeType } from "../../utils/utils";
+import * as EndPoints from "../../services/api/endPoints";
+import LoaderPage from "../../components/LoaderPage/loaderpage";
 
 export default function AddUser() {
   const {
@@ -44,8 +48,15 @@ export default function AddUser() {
 
   async function createUser(userData) {
     setLoading(true);
+    userData.date_of_birth = convertDateToDateTimeType(userData.date_of_birth);
 
-    console.log(userData);
+    try {
+      await EndPoints.createUser(userData);
+      alert("Usuário adicionado com sucesso.");
+      navigate("/listaDeUsuarios");
+    } catch (error) {
+      setRegisterError(error?.response?.data?.message || "Erro ao cadastrar.");
+    }
 
     setLoading(false);
   }
@@ -86,9 +97,11 @@ export default function AddUser() {
                 <Option value="" disabled selected>
                   Tipo de Usuário
                 </Option>
-                <Option value="client">Cliente</Option>
-                <Option value="master">Master</Option>
-                <Option value="librarian">Bibliotecário</Option>
+                <Option value="Cliente">Cliente</Option>
+                {Authenticated().type === "Master" && (
+                  <Option value="Master">Master</Option>
+                )}
+                <Option value="Bibliotecário(a)">Bibliotecário(a)</Option>
               </Select>
               {errors.type && (
                 <ErrorMessage>{errors.type.message}</ErrorMessage>
@@ -160,17 +173,13 @@ export default function AddUser() {
             </InputWrapper>
             <ErrorMessage>{registerError}</ErrorMessage>
             {loading ? (
-              {
-                /* <LoaderBox>
-                <LoadingOutlined spin />
-              </LoaderBox> */
-              }
+              <LoaderPage />
             ) : (
               <LoginAndRegisterButtonsContainer>
                 <CancelButton
                   type="button"
                   value="CANCELAR"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate("/listaDeUsuarios")}
                 />
 
                 <SubmitButton type="submit" value="FINALIZAR" />

@@ -20,7 +20,7 @@ import SearchBar from "../../components/SearchBar/searchBar";
 import * as EndPoints from "../../services/api/endPoints";
 import { Authenticated } from "../../services/api/auth.js";
 import { AddUserButton } from "./components/index.js";
-import ViewUserModal from "../../modals/ViewUserModal/styles";
+import ViewUserModal from "../../modals/ViewUserModal/viewUserModal.jsx";
 
 export default function UsersList() {
   const [open, setOpen] = useState(false);
