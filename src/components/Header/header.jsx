@@ -26,15 +26,15 @@ export default function Header() {
         },
         {
           key: "2",
-          label: <Link to="catalago">Catálogo</Link>,
+          label: <Link to="/catalago">Catálogo</Link>,
         },
-        Authenticated() !== "Cliente" && {
+        Authenticated().type !== "Cliente" && {
           key: "3",
-          label: <Link to="listaDeUsuarios">Usuários</Link>,
+          label: <Link to="/listaDeUsuarios">Usuários</Link>,
         },
         {
           key: "4",
-          label: <Link to="perfil">Meu Perfil</Link>,
+          label: <Link to="/perfil">Meu Perfil</Link>,
         },
         {
           key: "5",
@@ -63,9 +63,14 @@ export default function Header() {
             <Hover>Home</Hover>
           </Link>
           {Authenticated() && Authenticated().type !== "Cliente" && (
-            <Link to="listaDeUsuarios">
-              <Hover>Usuários</Hover>
-            </Link>
+            <>
+              <Link to="listaDeUsuarios">
+                <Hover>Usuários</Hover>
+              </Link>
+              <Link to="listaDeLocacoes">
+                <Hover>Locações</Hover>
+              </Link>
+            </>
           )}
           <Link to="catalogo">
             <Hover>Catálogo</Hover>

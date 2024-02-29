@@ -21,5 +21,8 @@ export const getBooksByGenre = (genre) =>
 export const getBookById = (id) => instance.get(`/getBookById/${id}`);
 export const getBooksGenres = () => instance.get("/getBooksGenres");
 
+export const getRentals = () => instance.get("/getRentals");
+export const getRentalByStatus = (status) =>
+  instance.get(`/getRentalByStatus/${status}`);
 export const getRentalByClientId = (id) =>
   instance.get(`/getRentalByClientId/${id}`);

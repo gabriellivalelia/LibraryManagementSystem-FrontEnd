@@ -18,7 +18,9 @@ import {
   EditProfile,
   AddUser,
   AddBook,
+  AddRental,
   UserList,
+  RentalsList,
   Notifications,
   NotFound,
   NotAuthenticated,
@@ -72,6 +74,8 @@ const router = createBrowserRouter(
               <Route path="cadastrarUsuario" element={<AddUser />} />
               <Route path="adicionarLivro" element={<AddBook />} />
               <Route path="listaDeUsuarios" element={<UserList />} />
+              <Route path="listaDeLocacoes" element={<RentalsList />} />
+              <Route path="criarLocacao" element={<AddRental />} />
             </Route>
           </Route>
           <Route path="naoAutenticado" element={<NotAuthenticated />} />

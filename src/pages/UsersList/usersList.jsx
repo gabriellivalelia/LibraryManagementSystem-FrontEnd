@@ -68,75 +68,73 @@ export default function UsersList() {
   }, [selectedUserType]);
 
   return (
-    <React.StrictMode>
-      <Wrapper>
-        <CustomModal
-          open={open}
-          onCancel={handleCancel}
-          centered="true"
-          footer={null}
-        >
-          <ViewUserModal />
-        </CustomModal>
-        <FiltersAndAddButtonWrapper>
-          <SearchBar
-            placeholder="Busque por nome..."
-            onChange={(value) => setSearchBarInput(value)}
-          />
-          <Select onChange={(e) => handleSelectedUserType(e)}>
-            <Option key="0" value="">
-              Todos os tipos
-            </Option>
-            <Option key="1" value="Cliente">
-              Clientes
-            </Option>
-            <Option key="2" value="Bibliotecário(a)">
-              Bibliotecários(as)
-            </Option>
-            <Option key="3" value="Master">
-              Masters
-            </Option>
-          </Select>
-          <AddUserButton />
-        </FiltersAndAddButtonWrapper>
-        <TableHeaderWrapper>
-          <Name>Nome</Name>
-          <CPF>CPF</CPF>
-          <Type>Tipo</Type>
-        </TableHeaderWrapper>
-        <UsersWrapper>
-          {users
-            ?.filter((user) =>
-              user.name
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .includes(searchBarInput)
-            )
-            .map((user) => (
-              <UserCard key={user.id}>
-                <Name
-                  hover={true}
-                  onClick={showModal}
-                  style={{ cursor: "pointer" }}
-                >
-                  {user.name}
-                </Name>
-                <CPF>{user.cpf}</CPF>
-                <Type>{user.type}</Type>
+    <Wrapper>
+      <CustomModal
+        open={open}
+        onCancel={handleCancel}
+        centered="true"
+        footer={null}
+      >
+        <ViewUserModal />
+      </CustomModal>
+      <FiltersAndAddButtonWrapper>
+        <SearchBar
+          placeholder="Busque por nome..."
+          onChange={(value) => setSearchBarInput(value)}
+        />
+        <Select onChange={(e) => handleSelectedUserType(e)}>
+          <Option key="0" value="">
+            Todos os tipos
+          </Option>
+          <Option key="1" value="Cliente">
+            Clientes
+          </Option>
+          <Option key="2" value="Bibliotecário(a)">
+            Bibliotecários(as)
+          </Option>
+          <Option key="3" value="Master">
+            Masters
+          </Option>
+        </Select>
+        <AddUserButton />
+      </FiltersAndAddButtonWrapper>
+      <TableHeaderWrapper>
+        <Name>Nome</Name>
+        <CPF>CPF</CPF>
+        <Type>Tipo</Type>
+      </TableHeaderWrapper>
+      <UsersWrapper>
+        {users
+          ?.filter((user) =>
+            user.name
+              .toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .includes(searchBarInput)
+          )
+          .map((user) => (
+            <UserCard key={user.id}>
+              <Name
+                hover={true}
+                onClick={showModal}
+                style={{ cursor: "pointer" }}
+              >
+                {user.name}
+              </Name>
+              <CPF>{user.cpf}</CPF>
+              <Type>{user.type}</Type>
 
-                {user.id !== Authenticated().id && (
-                  <DeleteUserButton
-                    className="material-icons"
-                    onClick={() => deleteUser(user.id)}
-                  >
-                    person_remove
-                  </DeleteUserButton>
-                )}
-              </UserCard>
-            ))}
-        </UsersWrapper>
-      </Wrapper>
-    </React.StrictMode>
+              {user.id !== Authenticated().id && (
+                <DeleteUserButton
+                  className="material-icons"
+                  onClick={() => deleteUser(user.id)}
+                >
+                  person_remove
+                </DeleteUserButton>
+              )}
+            </UserCard>
+          ))}
+      </UsersWrapper>
+    </Wrapper>
   );
 }

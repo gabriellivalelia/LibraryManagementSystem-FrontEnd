@@ -12,7 +12,7 @@ export const SearchBarWrapper = styled.div`
   border: solid 2px ${Colors.ORANGE};
   border-radius: 0.25rem;
 
-  @media (max-width: 590px) {
+  @media (max-width: 735px) {
     width: 90%;
     min-width: 90%;
   }
